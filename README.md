@@ -5,12 +5,8 @@ Steps to be followed
 
 1. create a database called tedx
 1. create a table called tedx with following schema (make sure tedx is in lowercase)
-+-------+--------------+------+-----+---------+-------+
-| Field | Type         | Null | Key | Default | Extra |
-+-------+--------------+------+-----+---------+-------+
-| email | varchar(100) | YES  |     | NULL    |       |
-| id    | varchar(10)  | YES  |     | NULL    |       |
-+-------+--------------+------+-----+---------+-------+
+![image](https://user-images.githubusercontent.com/98171563/216509965-993a58e8-4a2b-495f-a3a4-8d5b8bc2043e.png)
+
 
 1. add first record as 
 email: test@gmail.com          id: TES000

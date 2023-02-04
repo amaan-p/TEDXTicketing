@@ -1,6 +1,8 @@
 import mysql.connector
 import fpdf
 from datetime import datetime
+import random
+import string
 now = datetime.now()
 # Connect to MySQL database
 mydb = mysql.connector.connect(
@@ -50,11 +52,21 @@ def last_id():
     count=extract_integer(uid)
     return count
 
-def databse_unique_id(email,unique_id):
-    sql = "INSERT INTO tedx (email, id) VALUES (%s, %s)"
-    val = (email, unique_id)
+def databse_unique_id(email,unique_id,tid):
+    sql = "INSERT INTO tedx (email, id, transid) VALUES (%s, %s,%s)"
+    val = (email, unique_id, tid)
     mycursor.execute(sql, val)
     mydb.commit()
+
+def unique_trans_id():
+    # initializing size of string
+    N = 5
+ 
+    # using random.choices()
+    # generating random strings
+    res = ''.join(random.choices(string.ascii_letters, k=N))
+    final="TED"+str(res)
+    return final
 
 # Function to send a PDF containing the unique ID
 def send_pdf(email, unique_id,name,phno,transid,choice):
@@ -63,7 +75,7 @@ def send_pdf(email, unique_id,name,phno,transid,choice):
     pdf.add_page()
     pdf.set_font('Courier', 'B', 14)
     pdf.set_text_color(0,0,0)
-    pdf.image('./pics/t.png', x = 5, y = 80, w = 200, h = 70)
+    pdf.image('./pics/t.jpeg', x = 5, y = 80, w = 200, h = 70)
     pdf.set_x(167)
     pdf.cell(600, 215, txt=fname[0].upper(),)
     pdf.set_x(167)
@@ -71,11 +83,11 @@ def send_pdf(email, unique_id,name,phno,transid,choice):
     pdf.add_page()
     pdf.set_font('helvetica', 'B', 20)
 
-    pdf.image('./pics/1.png', x = 0, y = 0, w = 210, h = 300)
+    pdf.image('./pics/1.jpeg', x = 0, y = 0, w = 210, h = 300)
     pdf.set_x(163)
     pdf.cell(200, 15, txt=str(now.strftime("%d/%m/%Y")),)
     pdf.set_x(33)
-    pdf.cell(200, 115, txt=name,)
+    pdf.cell(200, 115, txt=name.upper(),)
     pdf.set_x(43)
     pdf.cell(200, 140, txt=email.upper(),)  
     pdf.set_x(87)
@@ -88,7 +100,7 @@ def send_pdf(email, unique_id,name,phno,transid,choice):
     pdf.image('./pics/tt1.png', x = 0, y = 0, w = 200, h = 290)
     pdf.add_page()
     pdf.image('./pics/tt2.png', x = 0, y = 0, w = 200, h = 290)
-    pdf.output(f"{unique_id}.pdf")
+    pdf.output(f"./pdf/{unique_id}.pdf")
                                     
 #####################################################################################
 
@@ -106,14 +118,14 @@ while(True):
     name=input("Enter name:")
     email=input("Enter Email:")
     phno=input("Enter Phone Number:")
-    tid=input("Enter Transaction Id:")
+    tid=unique_trans_id()
     choice=input("Enter A for Adhaar and P for Pancard: ")
     if choice.upper()=="A":
         userid="AADHAR CARD"
     else:
         userid="PAN CARD"
     unique_id=generate_unique_id(email,count)
-    databse_unique_id(email,unique_id[0])
+    databse_unique_id(email,unique_id[0],tid)
     send_pdf(email,unique_id[0],name,phno,tid,userid)
     count=unique_id[1]
 

@@ -1,7 +1,8 @@
 # TEDXTicketing
 
-Steps to be followed
-1) MYSQL SETUP
+## Steps to be followed
+---------------------------------------------------
+### MYSQL SETUP
 
 1. create a database called tedx
 1. create a table called tedx with following schema (make sure tedx is in lowercase)
@@ -9,11 +10,12 @@ Steps to be followed
 
 
 1. add first record as 
-email: test@gmail.com   id: TES000  transid:00000000
+<br/>email: test@gmail.com <br /> id: TES000<br/>transid:00000000
 
 1. whenever you are done with ticketing paste ss in the group
+-------------------------------
 
-# Sending the mail
+### Sending the mail
 
 1. Use the offcial login provided on your personal whatsapp on outlook (msg me for email)
 

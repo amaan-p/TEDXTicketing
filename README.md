@@ -32,7 +32,7 @@ Kindly carry the soft copy with you on the D-Day.
 For any assistance or modification, kindly contact us. 
 Looking forward to seeing you there!
 
-Warm regards, 
+Warm regards, <br/>
 TEDxMithibaiCollege Team
 
 
